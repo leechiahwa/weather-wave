@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-[100dvh]">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <Navbar />
         <Outlet />
