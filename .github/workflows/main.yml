@@ -19,15 +19,18 @@ jobs:
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
+        with:
+          working-directory: Weather Wave
 
       - name: Build project
         run: npm run build
+        working-directory: Weather Wave
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
           name: production-files
-          path: ./dist
+          path: ./Weather Wave/dist
 
   deploy:
     name: Deploy
