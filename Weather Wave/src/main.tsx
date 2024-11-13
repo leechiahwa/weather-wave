@@ -1,7 +1,7 @@
 // main.tsx
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
@@ -9,7 +9,7 @@ import Forecast from "./pages/Forecast.tsx";
 import CelestialEvent from "./pages/CelestialEvent.tsx";
 import About from "./pages/About.tsx";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   [
     {
       path: "/",
@@ -34,9 +34,9 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  {
-    basename: "/weather-wave",
-  }
+  // {
+  //   basename: "/weather-wave",
+  // }
 );
 
 createRoot(document.getElementById("root")!).render(
