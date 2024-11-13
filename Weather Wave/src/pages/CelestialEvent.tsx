@@ -1,5 +1,3 @@
-import React from "react";
-
 function CelestialEvent() {
   return (
     <div className="p-8">

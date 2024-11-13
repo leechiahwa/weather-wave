@@ -1,4 +1,3 @@
-import React from "react";
 import ForecastWeather from "../components/Forecast/ForecastWeather";
 
 function Forecast() {
