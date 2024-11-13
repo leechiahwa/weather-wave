@@ -43,7 +43,7 @@ function ForecastWeather() {
       console.log(data);
       if (data && data.forecast && data.forecast.forecastday) {
         setLocation(data.location);
-        setForecastData(data.forecast.forecastday); // Set forecast data correctly
+        setForecastData(data.forecast); // Set forecast data correctly
       } else {
         setError("Invalid data format received");
       }
@@ -128,7 +128,7 @@ function ForecastWeather() {
           ""
         )}
         <div className="flex justify-center">
-          {forecastData?.map((day: ForecastDay, index: number) => (
+          {forecastData?.forecastday.map((day: ForecastDay, index: number) => (
             <div
               className="rounded-xl border border-gray-200 shadow-md p-6
                    hover:shadow-xl transition-shadow duration-300
