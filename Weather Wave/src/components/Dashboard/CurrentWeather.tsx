@@ -27,6 +27,7 @@ function CurrentWeather() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [currentLocation, setCurrentLocation] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getWeatherData = async () => {
@@ -44,7 +45,8 @@ function CurrentWeather() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null); // Clear previous errors
+    setError(""); // Clear previous errors
+    setLoading(true);
 
     try {
       const data = await fetchCurrentWeather(currentLocation);
@@ -67,14 +69,12 @@ function CurrentWeather() {
 
       setError(errorMessage);
       setWeatherData(null);
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (!weatherData) {
-    return <div>Loading...</div>;
-  }
-
-  const { location, current } = weatherData;
+  const { location, current } = weatherData || { location: {}, current: {} };
 
   return (
     <>
@@ -83,75 +83,81 @@ function CurrentWeather() {
         <div className="flex gap-2">
           <Input
             type="text"
-            placeholder="Enter city name..."
+            placeholder="Enter city name"
             value={currentLocation}
             onChange={handleInputChange}
             className="flex-1"
           />
-          <Button type="submit" className="">
-            Search
+          <Button type="submit" disabled={loading}>
+            {loading ? "Loading..." : "Get Weather"}
           </Button>
         </div>
         {error && <p className="text-red-500 mt-2 text-sm">{error}</p>}
       </form>
-      <div className="rounded-xl border-2 shadow-lg p-6">
-        <div className="flex flex-col justify-center items-center">
-          <div className="p-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-          </div>
-          <h2 className="text-2xl font-semibold">
-            {location.name}, {location.country}
-          </h2>
+      {!weatherData ? (
+        <div className="text-center p-4">
+          <p className="text-gray-600">No weather data available</p>
         </div>
-        <div className="my-4">
-          <img
-            className="w-24 h-24 mx-auto"
-            src={current.condition.icon}
-            alt={current.condition.text}
-          />
-          <p className="text-xl ">{current.condition.text}</p>
+      ) : (
+        <div className="rounded-xl border-2 shadow-lg p-6">
+          <div className="flex flex-col justify-center items-center">
+            <div className="p-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-semibold">
+              {location.name}, {location.country}
+            </h2>
+          </div>
+          <div className="my-4">
+            <img
+              className="w-24 h-24 mx-auto"
+              src={current?.condition?.icon}
+              alt={current?.condition?.text}
+            />
+            <p className="text-xl ">{current?.condition?.text}</p>
+          </div>
+          {/* Weather Card */}
+          <div className="grid grid-cols-2 gap-4 mt-6">
+            <div className="text-center p-3 rounded-lg">
+              <p className="text-sm text-gray-500">Temperature</p>
+              <p className="text-xl font-medium">{current.temp_c}°C</p>
+            </div>
+            <div className="text-center p-3 rounded-lg">
+              <p className="text-sm text-gray-500">Feels like</p>
+              <p className="text-xl font-medium">{current.feelslike_c}°C</p>
+            </div>
+            <div className="text-center p-3  rounded-lg">
+              <p className="text-sm text-gray-500">Humidity</p>
+              <p className="text-xl font-medium">{current.humidity}%</p>
+            </div>
+            <div className="text-center p-3 rounded-lg">
+              <p className="text-sm text-gray-500">Wind</p>
+              <p className="text-xl font-medium">
+                {current.wind_kph} kph {current.wind_dir}
+              </p>
+            </div>
+          </div>
         </div>
-        {/* Weather Card */}
-        <div className="grid grid-cols-2 gap-4 mt-6">
-          <div className="text-center p-3 rounded-lg">
-            <p className="text-sm text-gray-500">Temperature</p>
-            <p className="text-xl font-medium">{current.temp_c}°C</p>
-          </div>
-          <div className="text-center p-3 rounded-lg">
-            <p className="text-sm text-gray-500">Feels like</p>
-            <p className="text-xl font-medium">{current.feelslike_c}°C</p>
-          </div>
-          <div className="text-center p-3  rounded-lg">
-            <p className="text-sm text-gray-500">Humidity</p>
-            <p className="text-xl font-medium">{current.humidity}%</p>
-          </div>
-          <div className="text-center p-3 rounded-lg">
-            <p className="text-sm text-gray-500">Wind</p>
-            <p className="text-xl font-medium">
-              {current.wind_kph} kph {current.wind_dir}
-            </p>
-          </div>
-        </div>
-      </div>
+      )}
     </>
   );
 }
