@@ -9,30 +9,35 @@ import Forecast from "./pages/Forecast.tsx";
 import CelestialEvent from "./pages/CelestialEvent.tsx";
 import About from "./pages/About.tsx";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      children: [
+        {
+          path: "/",
+          element: <Dashboard />,
+        },
+        {
+          path: "/forecast",
+          element: <Forecast />,
+        },
+        {
+          path: "/celestial-event",
+          element: <CelestialEvent />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "/",
-        element: <Dashboard />,
-      },
-      {
-        path: "/forecast",
-        element: <Forecast />,
-      },
-      {
-        path: "/celestial-event",
-        element: <CelestialEvent />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-    ],
-  },
-]);
+    basename: "/weather-wave",
+  }
+);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
