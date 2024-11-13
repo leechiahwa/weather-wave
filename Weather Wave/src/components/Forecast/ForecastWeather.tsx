@@ -80,21 +80,6 @@ function ForecastWeather() {
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
       {/* Weather Card */}
-      {/* {forecastData ? (
-        <ul className="space-y-4">
-          {Array.isArray(forecastData.forecastday) ? (
-            forecastData.forecastday.map((forecast) => (
-              <li key={forecast.date} className=" p-4 rounded">
-                <p className="font-semibold">Date: {forecast.date}</p>
-              </li>
-            ))
-          ) : (
-            <p>No forecast data available</p>
-          )}
-        </ul>
-      ) : (
-        <p>Loading...</p>
-      )} */}
       <div className="flex flex-col gap-4 p-4 justify-center items-center">
         {location ? (
           <div className="flex justify-center items-center">
@@ -127,12 +112,12 @@ function ForecastWeather() {
         ) : (
           ""
         )}
-        <div className="flex justify-center">
+        <div className="flex flex-wrap md:flex-nowrap justify-center">
           {forecastData?.forecastday.map((day: ForecastDay, index: number) => (
             <div
-              className="rounded-xl border border-gray-200 shadow-md p-6
+              className="rounded-xl border border-gray-200 shadow-md p-6 m-2
                    hover:shadow-xl transition-shadow duration-300
-                   flex flex-col items-center w-48"
+                   flex flex-col justify-between items-center w-48"
               key={index}
             >
               <p className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-1">
