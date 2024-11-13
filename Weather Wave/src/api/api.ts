@@ -14,8 +14,8 @@ export const forecastWeatherURL = createBaseURL('forecast');
 
 // Alternative approach using an object map
 const endpoints = {
-  current: `http://api.weatherapi.com/v1/current.json?key=${API_KEY}`,
-  forecast: `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}`
+  current: `https://api.weatherapi.com/v1/current.json?key=${API_KEY}`,
+  forecast: `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}`
 } as const;
 
 export const fetchCurrentWeather = async (city: string) => {
