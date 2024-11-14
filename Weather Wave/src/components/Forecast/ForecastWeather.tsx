@@ -62,10 +62,12 @@ function ForecastWeather() {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6">3-Day Weather Forecast</h2>
-
-      <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
+      <form
+        onSubmit={handleSubmit}
+        className="flex gap-2 mb-6 rounded-lg border shadow-sm p-4"
+      >
         <Input
+          required
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}

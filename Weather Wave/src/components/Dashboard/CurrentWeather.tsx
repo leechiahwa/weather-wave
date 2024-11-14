@@ -79,9 +79,13 @@ function CurrentWeather() {
   return (
     <>
       {/* Search Form */}
-      <form onSubmit={handleSubmit} className="mb-8  p-4 rounded-lg shadow-sm">
+      <form
+        onSubmit={handleSubmit}
+        className="mb-8 p-4 rounded-lg border shadow-sm"
+      >
         <div className="flex gap-2">
           <Input
+            required
             type="text"
             placeholder="Enter city name"
             value={currentLocation}
@@ -94,6 +98,7 @@ function CurrentWeather() {
         </div>
         {error && <p className="text-red-500 mt-2 text-sm">{error}</p>}
       </form>
+      {/* Weather Card */}
       {!weatherData ? (
         <div className="text-center p-4">
           <p className="text-gray-600">No weather data available</p>
@@ -135,7 +140,6 @@ function CurrentWeather() {
             />
             <p className="text-xl ">{current?.condition?.text}</p>
           </div>
-          {/* Weather Card */}
           <div className="grid grid-cols-2 gap-4 mt-6">
             <div className="text-center p-3 rounded-lg">
               <p className="text-sm text-gray-500">Temperature</p>
