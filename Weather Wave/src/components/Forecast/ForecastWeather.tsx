@@ -61,7 +61,7 @@ function ForecastWeather() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6">
+    <div className="w-full max-w-4xl mx-auto">
       <form
         onSubmit={handleSubmit}
         className="flex gap-2 mb-6 rounded-lg border shadow-sm p-4"

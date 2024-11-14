@@ -72,7 +72,7 @@ function Astronomy() {
     setLoading(false);
   };
   return (
-    <div className="w-full max-w-4xl mx-auto p-6">
+    <div className="w-full max-w-4xl mx-auto">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 mb-6 rounded-lg border shadow-sm p-4 max-w-md mx-auto"
