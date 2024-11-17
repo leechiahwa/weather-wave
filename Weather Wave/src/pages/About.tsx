@@ -19,8 +19,8 @@ const teamMembers = [
   },
   {
     name: "Teoh Zhen Ying",
-    bio: "Hi",
-    github: "",
+    bio: "Raindrops on roofs",
+    github: "https://github.com/teohzhenying",
     linkedin: "",
   },
   {
