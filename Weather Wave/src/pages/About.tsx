@@ -19,7 +19,7 @@ const teamMembers = [
   },
   {
     name: "Teoh Zhen Ying",
-    bio: "Raindrops on roofs",
+    bio: "Wireframe Sketcher",
     github: "https://github.com/teohzhenying",
     linkedin: "",
   },
